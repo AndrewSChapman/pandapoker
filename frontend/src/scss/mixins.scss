@@ -1,0 +1,120 @@
+@import 'globals.scss';
+
+@mixin button {
+    border-radius: $border-radius;
+    padding: $padding $padding-large;
+    text-align: center;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+    background-color: $info;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    font-size: 1em;
+    color: white;
+
+    &:hover {
+        background-color: $violet;
+    }
+
+    &:active {
+        background-color: $violet;
+    }
+
+    &.disabled {
+        background-color: $grey;
+        cursor: not-allowed;
+    }
+
+    &.cancel {
+        background-color: $light-grey;
+    }
+}
+
+@mixin action-states {
+    &.info {
+        color: $info;
+    }
+
+    &.positive {
+        color: $light-blue;
+    }
+
+    &.attention {
+        color: $violet;
+    }
+
+    &.warning, &.error {
+        color: $purple;
+    }
+}
+
+@mixin action-states-buttons {
+    filter: brightness(85%);
+    color: $white;
+
+    &.info {
+        background-color: $light-blue;
+    }
+
+    &.positive {
+        background-color: $green;
+    }
+
+    &.attention {
+        background-color: $violet;
+    }
+
+    &.warning, &.error {
+        background-color: $purple;
+    }
+
+    &.text_only {
+        background: none;
+        color: $positive;
+        padding-left: 0;
+    }
+
+    &:hover {
+        filter: brightness(100%);
+    }
+}
+
+@mixin animated-opacity-transition {
+    opacity: $opacity-notfocused;
+    transition: $transition-opacity;
+
+    &:hover {
+        opacity: 1.0;
+    }
+}
+
+@mixin panel($backgroundColor: $offwhite) {
+    padding: $padding-large;
+    border-radius: $border-radius;
+    background-color: $backgroundColor;
+    box-sizing: border-box;
+
+    p {
+        margin-top: $margin-small;
+    }
+}
+
+@mixin pill {
+    position: absolute;
+    right: 0;
+    background-color: $info;
+    display: block;
+    width: auto;
+    padding: $padding-small;
+    border-radius: $border-radius;
+    top: -2px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+@mixin spin {
+    @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+    @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+    @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+}

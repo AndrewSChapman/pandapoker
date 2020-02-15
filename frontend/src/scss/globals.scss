@@ -1,0 +1,57 @@
+/* COLOURS */
+$white: white;
+$light-blue: #1c77c3;
+$purple: #963484;
+$dark-blue: #03256c;
+$violet: #2541b2;
+$offwhite: #F4F4F4;
+$light-grey: #EEEEEE;
+$grey: #666666;
+$green: #29af00;
+$red: #AA0000;
+
+/* SEMANTIC COLOURS */
+$app-background-color: $white;
+$positive: $light-blue;
+$negative: $red;
+$warning: $purple;
+$info: $violet;
+
+/* TYPE */
+$font-stack: 'Andika', sans-serif;
+$font-bold: 600;
+$heading-primary-size: 1.6em;
+$heading-secondary-size: 1.4em;
+$heading-tertiary-size: 1.1em;
+$font-size-standard: 1em;
+$font-size-small: 0.8em;
+
+
+/* SPACING AND PRESENTATION */
+$margin-standard: 20px;
+$border-radius: 4px;
+$component-padding: 10px;
+$table-cell-padding: 20px 10px;
+$padding: 10px;
+$padding-small: 5px;
+$padding-large: 20px;
+
+$margin-large: 40px;
+$margin: 20px;
+$margin-small: 10px;
+
+$spacing-standard: $margin;
+$spacing-small: $margin-small;
+
+/* FORMS */
+$input-border: 1px solid $grey;
+$input-border-wide: 3px solid $grey;
+
+/* ELEMENTS */
+$header-height: 80px;
+$footer-height: 50px;
+$sidebar-width: 320px;
+
+/* TRANSITIONS */
+$opacity-notfocused: 0.8;
+$transition-opacity: opacity 0.5s ease-in-out;
