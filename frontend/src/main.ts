@@ -57,7 +57,10 @@ Vue.use(requestFactory);
 Vue.use(helperFactory);
 Vue.use(storeProvider);
 
-const webSocketManager = new WebSocketManager('localhost', 8082, storeProvider);
+const WEB_SOCKET_HOST = process.env.VUE_APP_WEBSOCKET_HOST || 'pandapoker.chapmandigital.co.uk';
+const WEB_SOCKET_PORT = process.env.VUE_APP_WEBSOCKET_PORT || 8082;
+
+const webSocketManager = new WebSocketManager(WEB_SOCKET_HOST, WEB_SOCKET_PORT, storeProvider);
 webSocketManager.init();
 
 new Vue({
