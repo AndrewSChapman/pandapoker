@@ -32,8 +32,8 @@ library.add(faEllipsisV);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.config.productionTip = false;
 
-const BASE_URL = process.env.VUE_APP_BASE_URL || 'https://estidat.com';
-const API_URL = BASE_URL;
+const BASE_URL = process.env.VUE_APP_BASE_URL || 'https://pandapoker.chapmandigital.co.uk';
+const API_URL = process.env.VUE_APP_API_URL || 'https://pandapoker.chapmandigital.co.uk/api';
 const apiClient = new ApiClient(API_URL);
 
 const environmentName: keyof typeof Environment = process.env.VUE_APP_ENVIRONMENT || 'Production';
