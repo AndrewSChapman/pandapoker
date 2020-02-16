@@ -374,16 +374,6 @@
 
             this.loaded = true;
         }
-
-        /**
-         * TODO: We need a better solution than this as the room can be cleared from the state in contexts
-         * where we do NOT want to redirect.
-        @Watch('room')
-        private handleRoomDeletedByAnotherUser(): void {
-            if ((this.loaded) && (this.room.id.length <= 1)) {
-                navigateTo(this.$router).roomList();
-            }
-        } **/
     }
 </script>
 

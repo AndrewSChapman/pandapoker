@@ -12,6 +12,7 @@ export class WebSocketManager {
     constructor(
         private websocketDomain: string,
         private websocketPort: number,
+        private useSSL: boolean,
         private storeProvider: StoreProvider,
     ) {
 
@@ -20,7 +21,8 @@ export class WebSocketManager {
     public init(): void {
         this.storeProvider.user.setSocketStatus(false);
 
-        this.socket = new WebSocket(`ws://${this.websocketDomain}:${this.websocketPort}/`);
+        const protocol = this.useSSL ? 'wss' : 'ws';
+        this.socket = new WebSocket(`${protocol}://${this.websocketDomain}:${this.websocketPort}/`);
 
         this.socket.onmessage = (message) => {
             const messageData = JSON.parse(message.data);
