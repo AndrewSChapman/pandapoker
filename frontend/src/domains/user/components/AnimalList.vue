@@ -6,6 +6,9 @@
         <li @click="selectAnimal('cat')">
             <Animal animal-type="cat" :selected="selectedAnimalType == 'cat'" />
         </li>
+        <li @click="selectAnimal('cow')">
+            <Animal animal-type="cow" :selected="selectedAnimalType == 'cow'" />
+        </li>
         <li @click="selectAnimal('dog')">
             <Animal animal-type="dog" :selected="selectedAnimalType == 'dog'" />
         </li>
@@ -15,11 +18,23 @@
         <li @click="selectAnimal('elephant')">
             <Animal animal-type="elephant" :selected="selectedAnimalType == 'elephant'"  />
         </li>
+        <li @click="selectAnimal('goat')">
+            <Animal animal-type="goat" :selected="selectedAnimalType == 'goat'" />
+        </li>
+        <li @click="selectAnimal('lion')">
+            <Animal animal-type="lion" :selected="selectedAnimalType == 'lion'" />
+        </li>
         <li @click="selectAnimal('monkey')">
             <Animal animal-type="monkey" :selected="selectedAnimalType == 'monkey'" />
         </li>
         <li @click="selectAnimal('owl')">
             <Animal animal-type="owl" :selected="selectedAnimalType == 'owl'" />
+        </li>
+        <li @click="selectAnimal('pig')">
+            <Animal animal-type="pig" :selected="selectedAnimalType == 'pig'" />
+        </li>
+        <li @click="selectAnimal('rooster')">
+            <Animal animal-type="rooster" :selected="selectedAnimalType == 'rooster'" />
         </li>
     </ul>
 </template>

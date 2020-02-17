@@ -224,8 +224,8 @@
             position: relative;
 
             .logo-wrapper {
-                margin-top: 15px;
-                margin-left: 20px;
+                margin-top: 10px;
+                margin-left: 10px;
 
                 img {
                     height: 40px;

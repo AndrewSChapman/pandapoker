@@ -22,6 +22,7 @@ export class WebSocketManager {
         this.storeProvider.user.setSocketStatus(false);
 
         const protocol = this.useSSL ? 'wss' : 'ws';
+
         this.socket = new WebSocket(`${protocol}://${this.websocketDomain}:${this.websocketPort}/`);
 
         this.socket.onmessage = (message) => {

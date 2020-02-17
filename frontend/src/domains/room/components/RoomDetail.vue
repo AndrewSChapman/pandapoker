@@ -11,19 +11,12 @@
 
                 <ErrorMessage :message="errorMessage" v-if="errorMessage.length > 0" />
 
-                <ButtonBar class="actions">
-                    <SpinnerButton v-if="!room.voting_open && loggedInUserOwnsRoom(room.id)"
+                <ButtonBar v-if="showOpenVotingButton" class="actions">
+                    <SpinnerButton v-if="showOpenVotingButton"
                                    button-text="Open Voting"
                                    display-type="positive"
                                    :loading="roomVotingStatusChanging"
                                    @clicked="openVoting"
-                    />
-
-                    <SpinnerButton v-if="room.voting_open && loggedInUserOwnsRoom(room.id)"
-                                   button-text="Close Voting"
-                                   display-type="negative"
-                                   :loading="roomVotingStatusChanging"
-                                   @clicked="closeVoting"
                     />
                 </ButtonBar>
 
@@ -172,6 +165,10 @@
             return this.$storeProvider.user.loggedInUserId;
         }
 
+        public get showOpenVotingButton(): boolean {
+            return !this.room.voting_open && this.loggedInUserOwnsRoom(this.room.id);
+        }
+
         public getUserById(userId: string): UserItem {
             return this.$storeProvider.user.getUserById(userId);
         }
@@ -255,6 +252,7 @@
         public async removeUserFromRoom(roomId: string, userId: string) {
             this.roomBeingChangedId = roomId;
             await this.$storeProvider.room.deleteUserFromRoom(roomId, userId);
+            this.roomBeingChangedId = '';
         }
 
         public async openVoting() {
@@ -339,6 +337,8 @@
 
                 if (!this.room.voting_open) {
                     menuOptions.push({id: 'DeleteRoom', text: 'Delete Room'});
+                } else {
+                    menuOptions.push({id: 'CloseVoting', text: 'Close Voting'});
                 }
             } else {
                 menuOptions.push({id: 'ChangeRoomOwnership', text: 'Take Control of Room'});
@@ -355,6 +355,10 @@
 
                 case 'ChangeRoomOwnership':
                     this.changeRoomOwnership();
+                    break;
+
+                case 'CloseVoting':
+                    this.closeVoting();
                     break;
 
                 case 'DeleteRoom':
@@ -382,6 +386,10 @@
 
     .roomDetail {
         position: relative;
+
+        h1 {
+            max-width: 250px;
+        }
     }
 
     .ellipsisWrapper {

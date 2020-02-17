@@ -59,7 +59,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import '../../../scss/globals.scss';
+    @import 'src/scss/globals.scss';
 
     footer {
         width: 100%;
@@ -84,6 +84,10 @@
             }
         }
 
+        .footer-container {
+            height: 30px;
+        }
+
         @media(min-width: 900px) {
             height: 50px;
 
@@ -99,12 +103,7 @@
 
         .footer-container {
             max-width: 1200px;
-            height: 30px;
             position: relative;
-
-            @media(max-width: 900px) {
-                height: 50px;
-            }
 
             > div {
                 position: absolute;
@@ -145,6 +144,12 @@
             padding: 5px;
             transition: color 200ms linear;
             text-decoration: none;
+        }
+    }
+
+    @media (max-width: 900px) {
+        p {
+            padding-top: 5px;
         }
     }
 </style>

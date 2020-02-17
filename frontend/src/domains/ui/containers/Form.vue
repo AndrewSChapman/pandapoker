@@ -25,7 +25,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import '@/scss/globals.scss';
+    @import 'src/scss/globals.scss';
 
     .input-group {
         position: relative;
@@ -55,6 +55,16 @@
             padding: $padding 40px $padding $padding;
             border-radius: $border-radius;
             font-size: 1em;
+        }
+    }
+
+    @media (max-width: 600px) {
+        form {
+            fieldset {
+                width: 100%;
+            }
+
+            padding-bottom: $padding-large;
         }
     }
 </style>

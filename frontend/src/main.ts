@@ -59,7 +59,12 @@ Vue.use(storeProvider);
 
 const WEB_SOCKET_HOST = process.env.VUE_APP_WEBSOCKET_HOST || 'pandapoker.chapmandigital.co.uk';
 const WEB_SOCKET_PORT = process.env.VUE_APP_WEBSOCKET_PORT || 8082;
-const WEB_SOCKET_USE_SSL = process.env.VUE_APP_WEBSOCKET_USE_SSL || false;
+
+let WEB_SOCKET_USE_SSL = process.env.VUE_APP_WEBSOCKET_USE_SSL || false;
+
+if (WEB_SOCKET_USE_SSL === 'false') {
+  WEB_SOCKET_USE_SSL = false;
+}
 
 const webSocketManager = new WebSocketManager(WEB_SOCKET_HOST, WEB_SOCKET_PORT, WEB_SOCKET_USE_SSL, storeProvider);
 webSocketManager.init();

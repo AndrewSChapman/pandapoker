@@ -14,25 +14,26 @@
 
                     <ErrorMessage :message="errorMessage" v-if="errorMessage.length > 0" />
 
-                    <Table v-if="!noRoomsAvailable">
-                        <thead>
+                    <IncludeIf breakpoint="medium" operator=">=">
+                        <Table v-if="!noRoomsAvailable">
+                            <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Created By</th>
                                 <th>No. Participants</th>
                                 <th>Action</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                            </thead>
+                            <tbody>
                             <tr v-for="room in rooms">
                                 <td>{{ room.name }}</td>
                                 <td>{{ getUserNameFromId(room.created_by_user_id) }}</td>
                                 <td>{{ room.participants.length }}</td>
                                 <td>
                                     <BasicButton v-if="userLoggedIn"
-                                            display-type="info"
-                                            button-text="Enter Room"
-                                            @clicked="handleEnterRoom(room.id)"
+                                                 display-type="info"
+                                                 button-text="Enter Room"
+                                                 @clicked="handleEnterRoom(room.id)"
                                     />
                                     <p v-else>You may not enter a room until you
                                         <BasicButton
@@ -43,9 +44,40 @@
                                     </p>
                                 </td>
                             </tr>
-                        </tbody>
-                    </Table>
+                            </tbody>
+                        </Table>
+                    </IncludeIf>
 
+
+                    <IncludeIf breakpoint="medium" operator="<=">
+                        <Table v-if="!noRoomsAvailable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="room in rooms">
+                                    <td>{{ room.name }}</td>
+                                    <td>
+                                        <BasicButton v-if="userLoggedIn"
+                                                display-type="info"
+                                                button-text="Enter"
+                                                @clicked="handleEnterRoom(room.id)"
+                                        />
+                                        <p v-else>You may not enter a room until you
+                                            <BasicButton
+                                                    display-type="text_only"
+                                                    button-text="set your identity"
+                                                    @clicked="handleSetIdentity"
+                                            />
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                    </IncludeIf>
                     <ButtonBar>
                         <slot>
                             <BasicButton button-text="Create Room" display-type="positive" @clicked="handleCreateRoom" />
@@ -67,6 +99,7 @@
     import AppNavigation from '@/domains/app/components/AppNavigation.vue';
     import { RoomItem } from '@/domains/room/interfaces/RoomItem';
     import BasicButton from '@/domains/ui/buttons/BasicButton.vue';
+    import IncludeIf from '@/domains/shared/includeIf.vue';
     import { navigateTo } from '@/domains/shared/helpers/NavigationHelper';
     import { StoreProvider } from '@/domains/shared/storeProvider';
     import Spinner from '@/domains/ui/Spinner.vue';
@@ -82,6 +115,7 @@
             AppNavigation,
             ButtonBar,
             Container,
+            IncludeIf,
         },
     })
     export default class RoomList extends Vue {
