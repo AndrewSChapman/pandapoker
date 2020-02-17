@@ -72,7 +72,7 @@
 
                     <SpinnerButton v-if="room.voting_open && room.votes.length > 0 && loggedInUserOwnsRoom(room.id)"
                                    button-text="Reset Votes"
-                                   display-type="text_only"
+                                   display-type="INFO"
                                    :loading="votesResetting"
                                    @clicked="resetVotes"
                     />

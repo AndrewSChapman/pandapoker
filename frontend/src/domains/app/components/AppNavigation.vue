@@ -129,7 +129,7 @@
 
             &.socket-connected {
                 opacity: 1.0;
-                background-color: #0F0;
+                background-color: $green;
             }
         }
 
@@ -274,7 +274,6 @@
                     li.active {
                         a {
                             background-color: $violet;
-                            color: $violet;
                         }
                     }
                 }
