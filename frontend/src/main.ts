@@ -66,7 +66,14 @@ if (WEB_SOCKET_USE_SSL === 'false') {
   WEB_SOCKET_USE_SSL = false;
 }
 
-const webSocketManager = new WebSocketManager(WEB_SOCKET_HOST, WEB_SOCKET_PORT, WEB_SOCKET_USE_SSL, storeProvider);
+const webSocketManager = new WebSocketManager(
+    WEB_SOCKET_HOST,
+    WEB_SOCKET_PORT,
+    WEB_SOCKET_USE_SSL,
+    storeProvider,
+    router,
+);
+
 webSocketManager.init();
 
 new Vue({

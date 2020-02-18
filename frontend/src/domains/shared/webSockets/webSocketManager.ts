@@ -4,6 +4,8 @@ import { WebSocketEventType } from '@/domains/shared/webSockets/enums/webSocketE
 import { getLogger } from '@/domains/shared/logger/getLogger';
 import { LogLevel } from '@/domains/shared/logger/types/LogLevel';
 import { AnimalHelper } from '@/domains/user/helpers/AnimalHelper';
+import VueRouter from 'vue-router';
+import { navigateTo } from '@/domains/shared/helpers/NavigationHelper';
 
 export class WebSocketManager {
     private connected: boolean = false;
@@ -14,6 +16,7 @@ export class WebSocketManager {
         private websocketPort: number,
         private useSSL: boolean,
         private storeProvider: StoreProvider,
+        private router: VueRouter,
     ) {
 
     }
@@ -110,7 +113,14 @@ export class WebSocketManager {
 
                 getLogger().log(LogLevel.INFO, 'WebSocketManager::handleEvent - Handling deleted room event');
 
-                await this.storeProvider.room.handleRoomDeleted(event.room.id, this.storeProvider.user.loggedInUserId);
+                // If the room the user is in is the room that was deleted, we need to redirect
+                const userCurrentRoom = this.storeProvider.room.currentRoom;
+                if (userCurrentRoom) {
+                    if (userCurrentRoom.id === event.room.id) {
+                        await this.storeProvider.room.handleRoomDeleted(event.room.id, this.storeProvider.user.loggedInUserId);
+                        navigateTo(this.router).roomList();
+                    }
+                }
 
                 break;
 

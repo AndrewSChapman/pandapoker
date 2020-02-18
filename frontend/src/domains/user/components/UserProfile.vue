@@ -64,7 +64,7 @@ import Trilean from "@/domains/shared/enums/trilean";
 
 <script lang="ts">
     // Components
-    import { Component, Vue } from 'vue-property-decorator';
+    import { Component, Vue, Watch } from 'vue-property-decorator';
     import ButtonBar from '@/domains/ui/containers/ButtonBar.vue';
     import Container from '@/domains/app/components/Container.vue';
     // Typescript
@@ -107,7 +107,7 @@ import Trilean from "@/domains/shared/enums/trilean";
         private $storeProvider!: StoreProvider;
 
         public mounted() {
-            this.userName = this.$storeProvider.user.displayName;
+            this.userName = this.userDisplayName;
             this.totemAnimal = this.$storeProvider.user.totemAnimal;
         }
 
@@ -121,6 +121,11 @@ import Trilean from "@/domains/shared/enums/trilean";
             if (this.userName.length > 2) {
                 this.checkUsernameOk();
             }
+        }
+
+        @Watch('userDisplayName')
+        public handleUserDisplayNameChanged(): void {
+            this.userName = this.userDisplayName;
         }
 
         public async handleSaveUserIntent(): Promise<void> {
@@ -161,12 +166,20 @@ import Trilean from "@/domains/shared/enums/trilean";
         }
 
         public async handleAssumeUserIntent(): Promise<void> {
-            if (!this.formValid) {
+            if ((!this.formValid) || (!this.totemAnimal)) {
                 return;
             }
 
             this.assumingUser = true;
-            const success = await this.$storeProvider.user.assumeUser(this.userName);
+            let success = await this.$storeProvider.user.assumeUser(this.userName);
+
+            if (!success) {
+                this.assumingUser = false;
+                this.errorMessage = this.$storeProvider.user.errorMessage;
+                return;
+            }
+
+            success = await this.$storeProvider.user.updateUser(this.userName, this.totemAnimal);
             this.assumingUser = false;
 
             if (!success) {
